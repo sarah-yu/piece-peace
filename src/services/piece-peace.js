@@ -47,6 +47,23 @@ export function createBoard(newBoard) {
 		.catch(err => console.log(err))
 }
 
+export function deleteBoard(id) {
+	axios
+		.delete(`${servicePath}/boards/${id}`)
+		.then(response => this.props.history.push('/boards'))
+		.catch(err => console.log(err))
+}
+
+export function updateBoard(id, updatedBoard) {
+	axios
+		.put(`${servicePath}/boards/${id}`, updatedBoard)
+		.then(response => {
+			console.log('succesfully updated')
+			this.props.history.push(`/boards/${response.data._id}`)
+		})
+		.catch(err => console.log(err))
+}
+
 export function getImages() {
 	axios
 		.get(`${servicePath}/images`)
@@ -67,5 +84,7 @@ export default {
 	getBoards,
 	getBoard,
 	createBoard,
+	deleteBoard,
+	updateBoard,
 	getImages
 }

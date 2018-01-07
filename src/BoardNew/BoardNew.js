@@ -36,7 +36,7 @@ class BoardNew extends Component {
 
 	render() {
 		return (
-			<div>
+			<section>
 				<h1>Create a new board</h1>
 				<form onSubmit={e => this.handleSubmit(e)}>
 					<p>
@@ -52,7 +52,7 @@ class BoardNew extends Component {
 						<input type="submit" />
 					</p>
 				</form>
-			</div>
+			</section>
 		)
 	}
 }
