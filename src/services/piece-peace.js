@@ -159,12 +159,7 @@ export function updateBoardImage(boardId, imageId, updatedBoardImage) {
 		.catch(err => console.log(err))
 }
 
-export function moveImageAndUpdate(
-	boardId,
-	newBoardId,
-	imageId,
-	updatedBoardImage
-) {
+export function removeImageFromBoard(boardId, imageId) {
 	axios
 		.delete(`${servicePath}/boards/${boardId}/images/${imageId}`)
 		.then(response => {
@@ -172,11 +167,6 @@ export function moveImageAndUpdate(
 				board: response.data
 			})
 		})
-		.catch(err => console.log(err))
-
-	axios
-		.post(`${servicePath}/boards/${newBoardId}`, updatedBoardImage)
-		.then(() => this.props.history.push(`/boards/${boardId}`))
 		.catch(err => console.log(err))
 }
 
@@ -198,6 +188,6 @@ export default {
 	getBoardImage,
 	deleteBoardImage,
 	updateBoardImage,
-	moveImageAndUpdate,
+	removeImageFromBoard,
 	pinImageToBoard
 }

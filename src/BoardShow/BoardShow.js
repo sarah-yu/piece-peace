@@ -10,7 +10,8 @@ import {
 	deleteBoardImage,
 	getBoards,
 	updateBoardImage,
-	moveImageAndUpdate
+	removeImageFromBoard,
+	pinImageToBoard
 } from '../services/piece-peace'
 
 class BoardShow extends Component {
@@ -41,7 +42,8 @@ class BoardShow extends Component {
 		this.deleteBoardImage = deleteBoardImage.bind(this)
 		this.getBoards = getBoards.bind(this)
 		this.updateBoardImage = updateBoardImage.bind(this)
-		this.moveImageAndUpdate = moveImageAndUpdate.bind(this)
+		this.removeImageFromBoard = removeImageFromBoard.bind(this)
+		this.pinImageToBoard = pinImageToBoard.bind(this)
 	}
 
 	componentDidMount() {
@@ -171,12 +173,8 @@ class BoardShow extends Component {
 				updatedBoardImage
 			)
 		} else {
-			this.moveImageAndUpdate(
-				currentBoardId,
-				newBoardId,
-				imageId,
-				updatedBoardImage
-			)
+			this.removeImageFromBoard(currentBoardId, imageId)
+			this.pinImageToBoard(newBoardId, updatedBoardImage)
 		}
 
 		this.setState({
