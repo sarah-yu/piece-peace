@@ -6,8 +6,11 @@ import {
 	getBoard,
 	deleteBoard,
 	updateBoard,
-	getImage,
-	deleteBoardImage
+	getBoardImage,
+	deleteBoardImage,
+	getBoards,
+	updateBoardImage,
+	moveImageAndUpdate
 } from '../services/piece-peace'
 
 class BoardShow extends Component {
@@ -21,20 +24,29 @@ class BoardShow extends Component {
 			},
 			boardEditOn: false,
 			imageEditOn: false,
-			currentBoardId: '',
-			imageToEditId: '',
-			imageToEdit: {}
+			imageToEditId: '', // for finding the image to be edited/deleted
+			imageToEdit: {
+				src: '',
+				origin: '',
+				description: ''
+			}, // for displaying and updating in image edit
+			boards: [], // for displaying in image edit dropdown,
+			newBoardId: '' // for when user chooses board in image edit dropdown
 		}
 
 		this.getBoard = getBoard.bind(this)
 		this.deleteBoard = deleteBoard.bind(this)
 		this.updateBoard = updateBoard.bind(this)
-		this.getImage = getImage.bind(this)
+		this.getBoardImage = getBoardImage.bind(this)
 		this.deleteBoardImage = deleteBoardImage.bind(this)
+		this.getBoards = getBoards.bind(this)
+		this.updateBoardImage = updateBoardImage.bind(this)
+		this.moveImageAndUpdate = moveImageAndUpdate.bind(this)
 	}
 
 	componentDidMount() {
 		this.getBoard(this.props.match.params._id)
+		this.getBoards() // for dropdowns in editing and pinning
 	}
 
 	handleBoardEditOn(e) {
@@ -78,17 +90,20 @@ class BoardShow extends Component {
 		})
 	}
 
-	handleImageEdit(e) {
+	handleImageEditOn(e) {
 		e.preventDefault()
 
 		this.setState(
 			{
 				imageEditOn: true,
-				currentBoardId: this.props.match.params._id,
-				imageToEditId: e.target.name
+				imageToEditId: e.target.name,
+				newBoardId: this.props.match.params._id
 			},
 			() => {
-				this.getImage(this.state.imageToEditId)
+				let boardId = this.state.board._id
+				let imageId = this.state.imageToEditId
+
+				this.getBoardImage(boardId, imageId)
 			}
 		)
 	}
@@ -105,9 +120,64 @@ class BoardShow extends Component {
 		e.preventDefault()
 
 		let imageToDeleteId = this.state.imageToEditId
-		let currentBoardId = this.state.currentBoardId
+		let newBoardId = this.state.board._id
 
-		this.deleteBoardImage(currentBoardId, imageToDeleteId)
+		this.deleteBoardImage(newBoardId, imageToDeleteId)
+
+		this.setState({
+			imageEditOn: false
+		})
+	}
+
+	handleImageInput(e) {
+		e.preventDefault()
+
+		let updatedImage = this.state.imageToEdit
+		updatedImage[e.target.name] = e.target.value
+
+		this.setState({ updatedImage }, () => {
+			console.log(this.state.imageToEdit)
+		})
+	}
+
+	// handles dropdown (updating the board that image belongs to)
+	handleImageBoardInput(e) {
+		e.preventDefault()
+
+		console.log(e.target.value)
+
+		this.setState(
+			{
+				newBoardId: e.target.value
+			},
+			() => {
+				console.log(this.state.newBoardId)
+			}
+		)
+	}
+
+	handleImageEditSubmit(e) {
+		e.preventDefault()
+
+		let currentBoardId = this.state.board._id
+		let newBoardId = this.state.newBoardId
+		let imageId = this.state.imageToEditId
+		let updatedBoardImage = this.state.imageToEdit
+
+		if (currentBoardId === newBoardId) {
+			this.updateBoardImage(
+				newBoardId, // because board is staying the same
+				imageId,
+				updatedBoardImage
+			)
+		} else {
+			this.moveImageAndUpdate(
+				currentBoardId,
+				newBoardId,
+				imageId,
+				updatedBoardImage
+			)
+		}
 
 		this.setState({
 			imageEditOn: false
@@ -134,12 +204,17 @@ class BoardShow extends Component {
 
 				<Image
 					images={this.state.board.images}
-					showEdit={true}
+					isBoardImage={true}
 					imageEditOn={this.state.imageEditOn}
 					imageToEdit={this.state.imageToEdit}
-					handleImageEdit={e => this.handleImageEdit(e)}
+					newBoardId={this.state.newBoardId}
+					boards={this.state.boards}
+					handleImageEditOn={e => this.handleImageEditOn(e)}
 					handleImageCancel={e => this.handleImageCancel(e)}
 					handleImageDelete={e => this.handleImageDelete(e)}
+					handleImageInput={e => this.handleImageInput(e)}
+					handleImageBoardInput={e => this.handleImageBoardInput(e)}
+					handleImageEditSubmit={e => this.handleImageEditSubmit(e)}
 				/>
 			</section>
 		)

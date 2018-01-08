@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Image from '../Image/Image'
-import { getImages } from '../services/piece-peace'
+import { getImages, getBoards } from '../services/piece-peace'
 
 import './ImageList.css'
 
@@ -10,21 +10,28 @@ class ImageList extends Component {
 		super(props)
 
 		this.state = {
-			images: []
+			images: [],
+			boards: [] // for displaying boards in image pin dropdown
 		}
 
 		this.getImages = getImages.bind(this)
+		this.getBoards = getBoards.bind(this)
 	}
 
 	componentDidMount() {
 		this.getImages()
+		this.getBoards()
 	}
 
 	render() {
 		return (
 			<section>
 				<h1>All Images</h1>
-				<Image images={this.state.images} showEdit={false} />
+				<Image
+					images={this.state.images}
+					isBoardImage={false}
+					boards={this.state.boards}
+				/>
 			</section>
 		)
 	}
