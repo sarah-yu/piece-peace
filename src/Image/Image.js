@@ -30,9 +30,6 @@ class Image extends Component {
 	handlePin(e) {
 		e.preventDefault()
 
-		console.log('pin this image to a board:')
-		console.log(e.target.name)
-
 		let currentBoardId = this.props.match.params._id
 		let imageToPinId = e.target.name
 
@@ -41,14 +38,9 @@ class Image extends Component {
 				imagePinOn: true
 			},
 			() => {
-				console.log('is this a board image?')
-				console.log(this.props.isBoardImage)
-
 				if (this.props.isBoardImage) {
-					// get board image and set it to imageToPin
 					this.getBoardImage(currentBoardId, imageToPinId)
 				} else {
-					// get original image and set it to imageToPin
 					this.getImage(imageToPinId)
 				}
 			}
@@ -56,21 +48,14 @@ class Image extends Component {
 	}
 
 	handlePinInput(e) {
-		console.log(e.target.name, e.target.value)
-
 		let imageToPin = this.state.imageToPin
 		imageToPin[e.target.name] = e.target.value
 
-		this.setState({ imageToPin }, () => {
-			console.log(this.state.imageToPin)
-		})
+		this.setState({ imageToPin })
 	}
 
 	// handles dropdown (which board image will be pinned to)
 	handlePinBoardInput(e) {
-		console.log('user is choosing a board to pin image to...')
-		console.log(e.target.value)
-
 		this.setState({
 			newBoardId: e.target.value
 		})
@@ -87,15 +72,13 @@ class Image extends Component {
 	handlePinSave(e) {
 		e.preventDefault()
 
-		console.log('***************')
-		console.log('clicked save! pin this image:')
-		console.log(this.state.imageToPin)
-		console.log('to this board:')
-		console.log(this.state.newBoardId)
-		console.log('***************')
-
-		let boardId = this.state.newBoardId
 		let imageToPin = this.state.imageToPin
+		let boardId
+		if (!this.state.newBoardId) {
+			boardId = this.props.boards[0]._id
+		} else {
+			boardId = this.state.newBoardId
+		}
 
 		this.pinImageToBoard(boardId, imageToPin)
 

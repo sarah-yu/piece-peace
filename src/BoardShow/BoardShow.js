@@ -72,8 +72,6 @@ class BoardShow extends Component {
 	}
 
 	handleBoardInput(e) {
-		console.log(e.target.value)
-
 		this.setState({
 			board: {
 				name: e.target.value,
@@ -137,25 +135,16 @@ class BoardShow extends Component {
 		let updatedImage = this.state.imageToEdit
 		updatedImage[e.target.name] = e.target.value
 
-		this.setState({ updatedImage }, () => {
-			console.log(this.state.imageToEdit)
-		})
+		this.setState({ updatedImage })
 	}
 
 	// handles dropdown (updating the board that image belongs to)
 	handleImageBoardInput(e) {
 		e.preventDefault()
 
-		console.log(e.target.value)
-
-		this.setState(
-			{
-				newBoardId: e.target.value
-			},
-			() => {
-				console.log(this.state.newBoardId)
-			}
-		)
+		this.setState({
+			newBoardId: e.target.value
+		})
 	}
 
 	handleImageEditSubmit(e) {

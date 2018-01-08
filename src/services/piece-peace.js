@@ -68,16 +68,10 @@ export function getImage(id) {
 	axios
 		.get(`${servicePath}/images/${id}`)
 		.then(response => {
-			// an (original) image (not a board image) for pinning
-			this.setState(
-				{
-					imageToPin: response.data
-				},
-				() => {
-					console.log('pinning an original, non-board image')
-					console.log(this.state.imageToPin)
-				}
-			)
+			// (original) image (not a board image) for pinning
+			this.setState({
+				imageToPin: response.data
+			})
 		})
 		.catch(err => console.log(err))
 }
@@ -87,42 +81,16 @@ export function getBoardImage(boardId, imageId) {
 	axios
 		.get(`${servicePath}/boards/${boardId}/images/${imageId}`)
 		.then(response => {
-			console.log('state of imagePinOn:')
-			console.log(this.state.imagePinOn)
-
 			if (this.state.imagePinOn) {
-				// a board image for pinning to another board
-				// set state of imageToPin
-				console.log('set state of imageToPin')
-
-				this.setState(
-					{
-						imageToPin: response.data
-					},
-					() => {
-						console.log('pinning the following board image:')
-						console.log(this.state.imageToPin)
-					}
-				)
+				// board image for pinning to another board
+				this.setState({
+					imageToPin: response.data
+				})
 			} else {
-				// a board image for editing
-				// set state of imageToEdit
-				console.log('set state of imageToEdit')
-
-				this.setState(
-					{
-						// imageToEdit: {
-						// 	src: response.data.src,
-						// 	origin: response.data.origin,
-						// 	description: response.data.description
-						// }
-						imageToEdit: response.data
-					},
-					() => {
-						console.log('editing the following image:')
-						console.log(this.state.imageToEdit)
-					}
-				)
+				// board image for editing
+				this.setState({
+					imageToEdit: response.data
+				})
 			}
 		})
 		.catch(err => console.log(err))
