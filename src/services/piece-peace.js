@@ -11,14 +11,9 @@ export function getBoards() {
 	axios
 		.get(`${servicePath}/boards`)
 		.then(response => {
-			this.setState(
-				{
-					boards: response.data
-				},
-				() => {
-					console.log(this.state.boards)
-				}
-			)
+			this.setState({
+				boards: response.data
+			})
 		})
 		.catch(err => console.log(err))
 }
@@ -27,15 +22,9 @@ export function getBoard(id) {
 	axios
 		.get(`${servicePath}/boards/${id}`)
 		.then(response => {
-			this.setState(
-				{
-					board: response.data
-				},
-				() => {
-					console.log('got board!:')
-					console.log(this.state.board.name)
-				}
-			)
+			this.setState({
+				board: response.data
+			})
 		})
 		.catch(err => console.log(err))
 }
@@ -68,14 +57,33 @@ export function getImages() {
 	axios
 		.get(`${servicePath}/images`)
 		.then(response => {
-			this.setState(
-				{
-					images: response.data
-				},
-				() => {
-					console.log(this.state.images)
-				}
-			)
+			this.setState({
+				images: response.data
+			})
+		})
+		.catch(err => console.log(err))
+}
+
+export function getImage(id) {
+	axios
+		.get(`${servicePath}/images/${id}`)
+		.then(response => {
+			this.setState({
+				imageToEdit: response.data
+			})
+		})
+		.catch(err => console.log(err))
+}
+
+export function deleteBoardImage(boardId, imageId) {
+	axios
+		.delete(`${servicePath}/boards/${boardId}/images/${imageId}`)
+		.then(response => {
+			this.setState({
+				board: response.data
+			})
+
+			this.props.history.push(`/boards/${boardId}`)
 		})
 		.catch(err => console.log(err))
 }
@@ -86,5 +94,7 @@ export default {
 	createBoard,
 	deleteBoard,
 	updateBoard,
-	getImages
+	getImages,
+	getImage,
+	deleteBoardImage
 }

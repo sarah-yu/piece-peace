@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 
 import BoardEdit from '../BoardEdit/BoardEdit'
-import { getBoard, deleteBoard, updateBoard } from '../services/piece-peace'
+import Image from '../Image/Image'
+import {
+	getBoard,
+	deleteBoard,
+	updateBoard,
+	getImage,
+	deleteBoardImage
+} from '../services/piece-peace'
 
 class BoardShow extends Component {
 	constructor(props) {
@@ -12,44 +19,45 @@ class BoardShow extends Component {
 				name: '',
 				images: []
 			},
-			editOn: false
+			boardEditOn: false,
+			imageEditOn: false,
+			currentBoardId: '',
+			imageToEditId: '',
+			imageToEdit: {}
 		}
 
 		this.getBoard = getBoard.bind(this)
 		this.deleteBoard = deleteBoard.bind(this)
 		this.updateBoard = updateBoard.bind(this)
-
-		// this.handleInput = this.handleInput.bind(this)
-		// this.handleCancel = this.handleCancel.bind(this)
-		// this.handleDelete = this.handleDelete.bind(this)
-		// this.handleEditSubmit = this.handleEditSubmit.bind(this)
+		this.getImage = getImage.bind(this)
+		this.deleteBoardImage = deleteBoardImage.bind(this)
 	}
 
 	componentDidMount() {
 		this.getBoard(this.props.match.params._id)
 	}
 
-	handleCancel(e) {
-		e.preventDefault()
-
+	handleBoardEditOn(e) {
 		this.setState({
-			editOn: false
+			boardEditOn: true
 		})
 	}
 
-	handleDelete(e) {
+	handleBoardCancel(e) {
+		e.preventDefault()
+
+		this.setState({
+			boardEditOn: false
+		})
+	}
+
+	handleBoardDelete(e) {
 		e.preventDefault()
 
 		this.deleteBoard(this.state.board._id)
 	}
 
-	handleEditOn(e) {
-		this.setState({
-			editOn: true
-		})
-	}
-
-	handleInput(e) {
+	handleBoardInput(e) {
 		console.log(e.target.value)
 
 		this.setState({
@@ -60,53 +68,79 @@ class BoardShow extends Component {
 		})
 	}
 
-	handleEditSubmit(e) {
+	handleBoardEditSubmit(e) {
 		e.preventDefault()
 
 		this.updateBoard(this.props.match.params._id, this.state.board)
 
 		this.setState({
-			editOn: false
+			boardEditOn: false
+		})
+	}
+
+	handleImageEdit(e) {
+		e.preventDefault()
+
+		this.setState(
+			{
+				imageEditOn: true,
+				currentBoardId: this.props.match.params._id,
+				imageToEditId: e.target.name
+			},
+			() => {
+				this.getImage(this.state.imageToEditId)
+			}
+		)
+	}
+
+	handleImageCancel(e) {
+		e.preventDefault()
+
+		this.setState({
+			imageEditOn: false
+		})
+	}
+
+	handleImageDelete(e) {
+		e.preventDefault()
+
+		let imageToDeleteId = this.state.imageToEditId
+		let currentBoardId = this.state.currentBoardId
+
+		this.deleteBoardImage(currentBoardId, imageToDeleteId)
+
+		this.setState({
+			imageEditOn: false
 		})
 	}
 
 	render() {
-		console.log(this.state)
-		console.log(this.state.board.images)
-
-		console.log(this.state.editOn)
-
-		let boardImages
-
-		if (this.state.board.images) {
-			boardImages = this.state.board.images.map((image, index) => {
-				return (
-					<div key={index} className="image">
-						<img src={image.src} alt={image.description} />
-						<h3>{image.description}</h3>
-					</div>
-				)
-			})
-		}
-
 		return (
 			<section>
-				{!this.state.editOn ? (
+				{!this.state.boardEditOn ? (
 					<div>
 						<h1>{this.state.board.name}</h1>
-						<button onClick={e => this.handleEditOn(e)}>Edit</button>
+						<button onClick={e => this.handleBoardEditOn(e)}>Edit</button>
 					</div>
 				) : (
 					<BoardEdit
 						board={this.state.board}
-						handleInput={e => this.handleInput(e)}
-						handleCancel={e => this.handleCancel(e)}
-						handleDelete={e => this.handleDelete(e)}
-						handleEditSubmit={e => this.handleEditSubmit(e)}
+						handleBoardInput={e => this.handleBoardInput(e)}
+						handleBoardCancel={e => this.handleBoardCancel(e)}
+						handleBoardDelete={e => this.handleBoardDelete(e)}
+						handleBoardEditSubmit={e => this.handleBoardEditSubmit(e)}
 					/>
 				)}
 
-				{this.state.board.images ? boardImages : 'loading...'}
+				<Image
+					images={this.state.board.images}
+					showEdit={true}
+					imageEditOn={this.state.imageEditOn}
+					imageToEdit={this.state.imageToEdit}
+					handleImageEdit={e => this.handleImageEdit(e)}
+					handleImageCancel={e => this.handleImageCancel(e)}
+					handleImageDelete={e => this.handleImageDelete(e)}
+				/>
 			</section>
 		)
 	}

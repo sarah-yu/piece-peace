@@ -16,8 +16,6 @@ class BoardNew extends Component {
 	}
 
 	handleInput(e) {
-		console.log(e.target.value)
-
 		this.setState({
 			board: {
 				name: e.target.value
@@ -27,9 +25,6 @@ class BoardNew extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault()
-
-		console.log(`the new board is: ${this.state.board.name}`)
-		console.log(this.state)
 
 		this.createBoard(this.state)
 	}

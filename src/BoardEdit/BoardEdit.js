@@ -13,13 +13,13 @@ class BoardEdit extends Component {
 							type="text"
 							name="board[name]"
 							value={this.props.board.name}
-							onChange={this.props.handleInput}
+							onChange={this.props.handleBoardInput}
 						/>
 					</div>
 					<div>
-						<button onClick={this.props.handleDelete}>Delete</button>
-						<button onClick={this.props.handleCancel}>Cancel</button>
-						<button onClick={this.props.handleEditSubmit}>Save</button>
+						<button onClick={this.props.handleBoardDelete}>Delete</button>
+						<button onClick={this.props.handleBoardCancel}>Cancel</button>
+						<button onClick={this.props.handleBoardEditSubmit}>Save</button>
 					</div>
 				</form>
 			</section>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import Image from '../Image/Image'
 import { getImages } from '../services/piece-peace'
 
 import './ImageList.css'
@@ -20,20 +21,10 @@ class ImageList extends Component {
 	}
 
 	render() {
-		let images = this.state.images.map((image, index) => {
-			return (
-				<div key={index}>
-					<div className="image">
-						<img src={image.src} alt={image.description} />
-					</div>
-					<h3>{image.description}</h3>
-				</div>
-			)
-		})
 		return (
 			<section>
 				<h1>All Images</h1>
-				{images}
+				<Image images={this.state.images} showEdit={false} />
 			</section>
 		)
 	}
