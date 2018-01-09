@@ -11,9 +11,14 @@ export function getBoards() {
 	axios
 		.get(`${servicePath}/boards`)
 		.then(response => {
-			this.setState({
-				boards: response.data
-			})
+			this.setState(
+				{
+					boards: response.data
+				},
+				() => {
+					console.log(this.state.boards)
+				}
+			)
 		})
 		.catch(err => console.log(err))
 }
@@ -56,9 +61,14 @@ export function getImages() {
 	axios
 		.get(`${servicePath}/images`)
 		.then(response => {
-			this.setState({
-				images: response.data
-			})
+			this.setState(
+				{
+					images: response.data
+				},
+				() => {
+					console.log(this.state.images)
+				}
+			)
 		})
 		.catch(err => console.log(err))
 }

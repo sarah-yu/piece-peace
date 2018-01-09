@@ -73,6 +73,7 @@ class Image extends Component {
 		e.preventDefault()
 
 		let imageToPin = this.state.imageToPin
+
 		let boardId
 		if (!this.state.newBoardId) {
 			boardId = this.props.boards[0]._id
@@ -80,11 +81,17 @@ class Image extends Component {
 			boardId = this.state.newBoardId
 		}
 
-		this.pinImageToBoard(boardId, imageToPin)
+		if (this.props.validateImageMove(boardId, imageToPin._id)) {
+			console.log('you can pin the image')
 
-		this.setState({
-			imagePinOn: false
-		})
+			this.pinImageToBoard(boardId, imageToPin)
+
+			this.setState({
+				imagePinOn: false
+			})
+		} else {
+			alert('image already exists on that board')
+		}
 	}
 
 	render() {

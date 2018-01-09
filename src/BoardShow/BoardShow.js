@@ -8,7 +8,7 @@ import {
 	updateBoard,
 	getBoardImage,
 	deleteBoardImage,
-	getBoards,
+	// getBoards,
 	updateBoardImage,
 	removeImageFromBoard,
 	pinImageToBoard
@@ -31,7 +31,7 @@ class BoardShow extends Component {
 				origin: '',
 				description: ''
 			}, // for displaying and updating in image edit
-			boards: [], // for displaying in image edit dropdown,
+			// boards: [], // for displaying in image edit dropdown,
 			newBoardId: '' // for when user chooses board in image edit dropdown
 		}
 
@@ -40,7 +40,7 @@ class BoardShow extends Component {
 		this.updateBoard = updateBoard.bind(this)
 		this.getBoardImage = getBoardImage.bind(this)
 		this.deleteBoardImage = deleteBoardImage.bind(this)
-		this.getBoards = getBoards.bind(this)
+		// this.getBoards = getBoards.bind(this)
 		this.updateBoardImage = updateBoardImage.bind(this)
 		this.removeImageFromBoard = removeImageFromBoard.bind(this)
 		this.pinImageToBoard = pinImageToBoard.bind(this)
@@ -48,7 +48,7 @@ class BoardShow extends Component {
 
 	componentDidMount() {
 		this.getBoard(this.props.match.params._id)
-		this.getBoards() // for dropdowns in editing and pinning
+		// this.getBoards() // for dropdowns in editing and pinning
 	}
 
 	handleBoardEditOn(e) {
@@ -157,18 +157,29 @@ class BoardShow extends Component {
 
 		if (currentBoardId === newBoardId) {
 			this.updateBoardImage(
-				newBoardId, // because board is staying the same
+				newBoardId, // because currentBoardId and newBoardId are identical
 				imageId,
 				updatedBoardImage
 			)
-		} else {
-			this.removeImageFromBoard(currentBoardId, imageId)
-			this.pinImageToBoard(newBoardId, updatedBoardImage)
-		}
 
-		this.setState({
-			imageEditOn: false
-		})
+			this.setState({
+				imageEditOn: false
+			})
+		} else {
+			// move image to a different board
+			if (this.props.validateImageMove(newBoardId, imageId)) {
+				console.log('you can move the image')
+
+				this.removeImageFromBoard(currentBoardId, imageId)
+				this.pinImageToBoard(newBoardId, updatedBoardImage)
+
+				this.setState({
+					imageEditOn: false
+				})
+			} else {
+				alert('image already exists on that board')
+			}
+		}
 	}
 
 	render() {
@@ -195,13 +206,14 @@ class BoardShow extends Component {
 					imageEditOn={this.state.imageEditOn}
 					imageToEdit={this.state.imageToEdit}
 					newBoardId={this.state.newBoardId}
-					boards={this.state.boards}
+					boards={this.props.boards}
 					handleImageEditOn={e => this.handleImageEditOn(e)}
 					handleImageCancel={e => this.handleImageCancel(e)}
 					handleImageDelete={e => this.handleImageDelete(e)}
 					handleImageInput={e => this.handleImageInput(e)}
 					handleImageBoardInput={e => this.handleImageBoardInput(e)}
 					handleImageEditSubmit={e => this.handleImageEditSubmit(e)}
+					validateImageMove={this.props.validateImageMove}
 				/>
 			</section>
 		)

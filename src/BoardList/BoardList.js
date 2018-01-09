@@ -2,27 +2,27 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { getBoards } from '../services/piece-peace'
+// import { getBoards } from '../services/piece-peace'
 
 import './BoardList.css'
 
 class BoardList extends Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			boards: []
-		}
-
-		this.getBoards = getBoards.bind(this)
-	}
-
-	componentDidMount() {
-		this.getBoards()
-	}
+	// constructor(props) {
+	// 	super(props)
+	//
+	// 	this.state = {
+	// 		boards: []
+	// 	}
+	//
+	// 	this.getBoards = getBoards.bind(this)
+	// }
+	//
+	// componentDidMount() {
+	// 	this.getBoards()
+	// }
 
 	render() {
-		let boards = this.state.boards.map((board, index) => {
+		let boards = this.props.boards.map((board, index) => {
 			return (
 				<div key={index}>
 					<Link to={`/boards/${board._id}`}>
@@ -40,7 +40,7 @@ class BoardList extends Component {
 		})
 		return (
 			<section>
-				<h1>My Boards - {this.state.boards.length} boards</h1>
+				<h1>My Boards - {this.props.boards.length} boards</h1>
 				<h2>
 					<Link to="/boards/new">Create a new board</Link>
 				</h2>
