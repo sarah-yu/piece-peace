@@ -134,7 +134,7 @@ class Image extends Component {
 				handlePinSave={e => this.handlePinSave(e)}
 			/>
 		) : (
-			<div className="images">{images}</div>
+			<div className="images">{images.reverse()}</div>
 		)
 	}
 }
