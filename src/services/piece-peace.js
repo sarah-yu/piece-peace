@@ -7,6 +7,30 @@ servicePath = 'http://localhost:3001/api'
 // 	servicePath = 'deployed api'
 // }
 
+// login or register
+export function getToken(action, email, password) {
+	axios
+		.post(`${servicePath}/${action}`, {
+			email: email,
+			password: password
+		})
+		.then(response => {
+			localStorage.token = response.data.token
+
+			console.log(localStorage.token)
+
+			if (action === 'register') {
+				console.log('registration successful')
+			} else {
+				// if (action === 'login')
+				console.log('login successful')
+			}
+
+			this.props.history.push('/')
+		})
+		.catch(err => console.log(err))
+}
+
 export function getBoards() {
 	axios
 		.get(`${servicePath}/boards`)
@@ -146,6 +170,7 @@ export function pinImageToBoard(boardId, imageToPin) {
 }
 
 export default {
+	getToken,
 	getBoards,
 	getBoard,
 	createBoard,

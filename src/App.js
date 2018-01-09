@@ -7,6 +7,10 @@ import ImageUpload from './ImageUpload/ImageUpload'
 import BoardList from './BoardList/BoardList'
 import BoardShow from './BoardShow/BoardShow'
 import BoardNew from './BoardNew/BoardNew'
+import ImageReceive from './ImageReceive/ImageReceive'
+import Login from './Account/Login'
+import Logout from './Account/Logout'
+import Register from './Account/Register'
 import { getBoards, getImages } from './services/piece-peace'
 
 import './App.css'
@@ -65,6 +69,17 @@ class App extends Component {
 								/>
 							)}
 						/>
+						<Route exact path="/login" render={props => <Login {...props} />} />
+						<Route
+							exact
+							path="/logout"
+							render={props => <Logout {...props} />}
+						/>
+						<Route
+							exact
+							path="/register"
+							render={props => <Register {...props} />}
+						/>
 						<Route
 							exact
 							path="/upload-image"
@@ -92,6 +107,11 @@ class App extends Component {
 									validateImageMove={this.validateImageMove}
 								/>
 							)}
+						/>
+						<Route
+							exact
+							path="/receive-images"
+							render={props => <ImageReceive {...props} />}
 						/>
 						<Route path="/*" render={() => <Redirect to="/" />} />
 					</Switch>
