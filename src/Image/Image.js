@@ -111,6 +111,8 @@ class Image extends Component {
 			)
 		})
 
+		images = images.reverse()
+
 		return this.props.imageEditOn ? (
 			<div>
 				<ImageEdit
@@ -134,7 +136,7 @@ class Image extends Component {
 				handlePinSave={e => this.handlePinSave(e)}
 			/>
 		) : (
-			<div className="images">{images.reverse()}</div>
+			<div className="images">{images}</div>
 		)
 	}
 }
