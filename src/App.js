@@ -33,22 +33,16 @@ class App extends Component {
 
 	// same image (identical image._id) cannot be pinned to same board twice
 	validateImageMove(boardId, imageId) {
-		// takes a board id and an image id and checks if the board already contains that image
-		console.log('validate image move!')
-		console.log('board:')
-		console.log(boardId)
-		console.log('image')
-		console.log(imageId)
-
+		// find the board in question
 		let board = this.state.boards.filter(board => board._id === boardId)
 		board = board[0]
+		// find the image that is to be moved/pinned
 		let image = board.images.filter(image => image._id === imageId)
 
+		// check if board already contains that image
 		if (image.length > 0) {
-			// alert(`image already exists on ${board.name}`)
 			return false
 		} else {
-			// alert(`you may move the image to ${board.name}`)
 			return true
 		}
 	}

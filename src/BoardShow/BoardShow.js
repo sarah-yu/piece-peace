@@ -8,7 +8,6 @@ import {
 	updateBoard,
 	getBoardImage,
 	deleteBoardImage,
-	// getBoards,
 	updateBoardImage,
 	removeImageFromBoard,
 	pinImageToBoard
@@ -31,7 +30,6 @@ class BoardShow extends Component {
 				origin: '',
 				description: ''
 			}, // for displaying and updating in image edit
-			// boards: [], // for displaying in image edit dropdown,
 			newBoardId: '' // for when user chooses board in image edit dropdown
 		}
 
@@ -40,7 +38,6 @@ class BoardShow extends Component {
 		this.updateBoard = updateBoard.bind(this)
 		this.getBoardImage = getBoardImage.bind(this)
 		this.deleteBoardImage = deleteBoardImage.bind(this)
-		// this.getBoards = getBoards.bind(this)
 		this.updateBoardImage = updateBoardImage.bind(this)
 		this.removeImageFromBoard = removeImageFromBoard.bind(this)
 		this.pinImageToBoard = pinImageToBoard.bind(this)
@@ -48,7 +45,6 @@ class BoardShow extends Component {
 
 	componentDidMount() {
 		this.getBoard(this.props.match.params._id)
-		// this.getBoards() // for dropdowns in editing and pinning
 	}
 
 	handleBoardEditOn(e) {
@@ -168,8 +164,6 @@ class BoardShow extends Component {
 		} else {
 			// move image to a different board
 			if (this.props.validateImageMove(newBoardId, imageId)) {
-				console.log('you can move the image')
-
 				this.removeImageFromBoard(currentBoardId, imageId)
 				this.pinImageToBoard(newBoardId, updatedBoardImage)
 
