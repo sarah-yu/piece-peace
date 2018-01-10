@@ -13,6 +13,8 @@ import {
 	pinImageToBoard
 } from '../services/piece-peace'
 
+import './BoardShow.css'
+
 class BoardShow extends Component {
 	constructor(props) {
 		super(props)
@@ -180,9 +182,18 @@ class BoardShow extends Component {
 		return (
 			<section>
 				{!this.state.boardEditOn ? (
-					<div>
-						<h1>{this.state.board.name}</h1>
-						<button onClick={e => this.handleBoardEditOn(e)}>Edit</button>
+					<div className="board-info">
+						<h2 className="board-name">
+							{this.state.board.name}{' '}
+							<i
+								className="fa fa-pencil board-edit"
+								aria-hidden="true"
+								onClick={e => this.handleBoardEditOn(e)}
+							/>
+						</h2>
+						<p className="board-num-pins">
+							{this.state.board.images.length} pins
+						</p>
 					</div>
 				) : (
 					<BoardEdit
