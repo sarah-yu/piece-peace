@@ -7,15 +7,20 @@ const Header = () => (
 	<header>
 		<nav>
 			<Link to="/" className="logo">
-				piece peace
+				<span className="logo-piece">piece</span>
+				<br />
+				<span className="logo-peace">peace</span>
 			</Link>
-			<Link to="/">home</Link>
-			<Link to="/upload-image">upload</Link>
-			<Link to="/boards">boards</Link>
+			<Link to="/">Home</Link>
+
 			{localStorage.token ? (
-				<Link to="/logout">logout</Link>
+				<Link to="/boards">
+					<i className="fa fa-user-circle" aria-hidden="true" /> Username
+				</Link>
 			) : (
-				<Link to="/login">login</Link>
+				<Link to="/login">
+					<i className="fa fa-user-circle" aria-hidden="true" /> Log In
+				</Link>
 			)}
 		</nav>
 	</header>

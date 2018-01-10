@@ -1,13 +1,45 @@
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+	background-color: #fff;
+	/* border-bottom: 2px solid #eee; */
+	padding: 0 12px;
+}
+
 nav {
 	display: flex;
 	flex-direction: row;
+	align-items: flex-end;
+	padding: 1rem 0;
 }
 
 nav a {
 	display: inline-block;
+	font-size: 18px;
+	font-weight: 700;
 	padding: 0.5rem 1rem;
 }
 
+nav a:hover {
+	color: #666;
+}
+
 .logo {
+	letter-spacing: 1px;
 	margin-right: auto;
+}
+
+.logo {
+	line-height: 1.1;
+}
+
+.logo-piece {
+	color: #4f9a94;
+}
+
+.logo-peace {
+	color: #80cbc4;
 }

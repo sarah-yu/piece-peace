@@ -1,3 +1,118 @@
-.board-summary-img {
+/*
+.boards
+--> .board-summary-container
+-----> img / board-summary-img
+-----> .board-summary-description
+--------> h3 (board-name)
+--------> p (# of pins in board)
+*/
+
+.boards {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+	margin: 0 auto;
+	width: 90%; /* makes the div look 'centered' on page */
+}
+
+.board-summary-container,
+.board-summary-img,
+.board-create-img-placeholder {
+	border-radius: 10px;
+	transition: 0.3s ease;
+	opacity: 1;
+}
+
+.board-summary-container {
+	position: relative;
+	background-color: #fff;
+	margin: 10px;
+	overflow: hidden;
+	padding: 5px;
 	width: 300px;
+}
+
+.board-summary-container:hover {
+	background-color: #f2f2f2;
+}
+
+.board-summary-container .board-summary-img {
+	opacity: 0.8;
+}
+
+.board-summary-img,
+.board-create-img-placeholder {
+	height: 220px;
+}
+
+.board-summary-description {
+	color: #444;
+	font-size: 14px;
+	overflow-wrap: break-word;
+	padding: 0 5px;
+}
+
+.board-summary-name,
+.board-summary-num-imgs {
+	margin: 0; /* get rid of default margins */
+}
+
+.board-summary-name {
+	font-size: 18px;
+	margin: 14px 0 2px 0;
+}
+
+.board-summary-num-imgs {
+	color: #888;
+	font-size: 12px;
+}
+
+.board-create-img-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #d3d3d3;
+}
+
+.board-create-img-placeholder .fa-plus-circle {
+	color: #4f9a94;
+}
+
+.create-board-link {
+	color: #888;
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+.user-area {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 200px;
+	margin: 0 auto;
+	width: 90%;
+}
+
+.username,
+.boards-num {
+	margin: 0;
+}
+
+.username {
+	margin-bottom: 8px;
+}
+
+.boards-num {
+	color: #888;
+	font-size: 14px;
+}
+
+.logout {
+	margin-right: 20px;
+}
+
+.logout a {
+	font-size: 14px;
 }

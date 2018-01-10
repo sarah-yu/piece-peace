@@ -1,3 +1,17 @@
+* {
+	box-sizing: border-box;
+}
+
+main {
+	margin-top: 105px;
+	z-index: 0;
+}
+
 img {
 	width: 100%;
+}
+
+a {
+	color: #444;
+	text-decoration: none;
 }

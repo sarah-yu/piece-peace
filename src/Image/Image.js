@@ -98,22 +98,28 @@ class Image extends Component {
 		let images = this.props.images.map((image, index) => {
 			return (
 				<div key={index} className="image-container">
-					<div className="image">
-						<img src={image.src} alt={image.description} />
-					</div>
+					<img src={image.src} alt={image.description} className="image" />
+					<p className="image-description">{image.description}</p>
 					<div className="image-edit">
 						{this.props.isBoardImage ? (
-							<button name={image._id} onClick={this.props.handleImageEditOn}>
-								Edit
+							<button
+								className="edit-image-btn"
+								name={image._id}
+								onClick={this.props.handleImageEditOn}
+							>
+								<i className="fa fa-pencil" aria-hidden="true" />
 							</button>
 						) : (
 							''
 						)}
-						<button name={image._id} onClick={e => this.handlePin(e)}>
-							Pin
+						<button
+							className="pin-image-btn"
+							name={image._id}
+							onClick={e => this.handlePin(e)}
+						>
+							<i className="fa fa-thumb-tack" aria-hidden="true" />
 						</button>
 					</div>
-					<h3>{image.description}</h3>
 				</div>
 			)
 		})

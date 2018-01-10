@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Header from './Header/Header'
 import ImageList from './ImageList/ImageList'
-import ImageUpload from './ImageUpload/ImageUpload'
 import BoardList from './BoardList/BoardList'
 import BoardShow from './BoardShow/BoardShow'
 import BoardNew from './BoardNew/BoardNew'
@@ -14,6 +13,8 @@ import Register from './Account/Register'
 import { getBoards, getImages } from './services/piece-peace'
 
 import './App.css'
+
+// import Masonry from 'masonry-layout'
 
 class App extends Component {
 	constructor(props) {
@@ -33,6 +34,13 @@ class App extends Component {
 	componentDidMount() {
 		this.getBoards()
 		this.getImages()
+
+		// let grid = document.querySelector('.grid')
+		// let msnry = new Masonry(grid, {
+		// 	itemSelector: '.grid-item',
+		// 	columnWidth: 120,
+		// 	gutter: 10
+		// })
 	}
 
 	// same image (identical image._id) cannot be pinned to same board twice
@@ -79,11 +87,6 @@ class App extends Component {
 							exact
 							path="/register"
 							render={props => <Register {...props} />}
-						/>
-						<Route
-							exact
-							path="/upload-image"
-							render={props => <ImageUpload {...props} />}
 						/>
 						<Route
 							exact
