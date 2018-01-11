@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { getToken } from '../services/piece-peace'
+
+import './Account.css'
+import '../Form.css'
 
 class Login extends Component {
 	constructor(props) {
@@ -39,33 +42,48 @@ class Login extends Component {
 			<section>
 				<h1>Login</h1>
 				<form onSubmit={e => this.handleSubmit(e)}>
-					<div>
-						<label htmlFor="username">Username</label>
+					<div className="form-section">
+						<label htmlFor="username" className="form-label">
+							Username
+						</label>
 						<br />
 						<input
 							type="text"
 							name="username"
 							placeholder="Username"
+							className="form-field"
 							onChange={e => this.handleInput(e)}
 						/>
 					</div>
-					<div>
-						<label htmlFor="password">Password</label>
+					<div className="form-section">
+						<label htmlFor="password" className="form-label">
+							Password
+						</label>
 						<br />
 						<input
 							type="password"
 							name="password"
 							placeholder="Password"
+							className="form-field"
 							onChange={e => this.handleInput(e)}
 						/>
 					</div>
-					<div>
-						<button type="submit">Login</button>
+					<div className="form-section">
+						<button type="submit" className="form-btn">
+							Login
+						</button>
 					</div>
 				</form>
 				<div>
 					<p>
-						Not signed up? Register <Link to="/register">here</Link>.
+						Not signed up? Register{' '}
+						<Link
+							to="/register"
+							onClick={this.props.handleOpenRegister}
+							className="link-to-register"
+						>
+							here
+						</Link>.
 					</p>
 				</div>
 			</section>
@@ -73,4 +91,4 @@ class Login extends Component {
 	}
 }
 
-export default Login
+export default withRouter(Login)

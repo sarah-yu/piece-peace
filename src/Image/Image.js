@@ -38,6 +38,8 @@ class Image extends Component {
 		// currentTarget solves issue where clicking icon inside button errors out
 		let imageToPinId = e.currentTarget.name
 
+		console.log(`IMAGE: imageToPinId: ${imageToPinId}`)
+
 		this.setState(
 			{
 				imagePinOn: true
@@ -87,6 +89,8 @@ class Image extends Component {
 			boardId = this.state.newBoardId
 		}
 
+		this.props.validateImageMove(boardId, imageToPin._id)
+
 		if (this.props.validateImageMove(boardId, imageToPin._id)) {
 			console.log('you can pin the image')
 
@@ -104,28 +108,30 @@ class Image extends Component {
 		let images = this.props.images.map((image, index) => {
 			return (
 				<div key={index} className="image-container">
-					<img src={image.src} alt={image.description} className="image" />
-					<p className="image-description">{image.description}</p>
-					<div className="image-edit">
-						{this.props.isBoardImage ? (
+					<a href={image.origin} target="_blank">
+						<img src={image.src} alt={image.description} className="image" />
+						<p className="image-description">{image.description}</p>
+						<div className="image-edit">
+							{this.props.isBoardImage ? (
+								<button
+									className="edit-image-btn"
+									name={image._id}
+									onClick={this.props.handleImageEditOn}
+								>
+									<i className="fa fa-pencil" aria-hidden="true" />
+								</button>
+							) : (
+								''
+							)}
 							<button
-								className="edit-image-btn"
+								className="pin-image-btn"
 								name={image._id}
-								onClick={this.props.handleImageEditOn}
+								onClick={e => this.handlePin(e)}
 							>
-								<i className="fa fa-pencil" aria-hidden="true" />
+								<i className="fa fa-thumb-tack" aria-hidden="true" />
 							</button>
-						) : (
-							''
-						)}
-						<button
-							className="pin-image-btn"
-							name={image._id}
-							onClick={e => this.handlePin(e)}
-						>
-							<i className="fa fa-thumb-tack" aria-hidden="true" />
-						</button>
-					</div>
+						</div>
+					</a>
 				</div>
 			)
 		})

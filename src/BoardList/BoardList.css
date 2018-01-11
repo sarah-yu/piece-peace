@@ -15,9 +15,15 @@
 	width: 90%; /* makes the div look 'centered' on page */
 }
 
+.board-summary-img-placeholder {
+	width: 100%;
+	background-color: #f2f2f2;
+}
+
 .board-summary-container,
 .board-summary-img,
-.board-create-img-placeholder {
+.board-create-img-placeholder,
+.board-summary-img-placeholder {
 	border-radius: 10px;
 	transition: 0.3s ease;
 	opacity: 1;
@@ -41,7 +47,8 @@
 }
 
 .board-summary-img,
-.board-create-img-placeholder {
+.board-create-img-placeholder,
+.board-summary-img-placeholder {
 	height: 220px;
 }
 

@@ -17,7 +17,7 @@ class BoardList extends Component {
 								className="board-summary-img"
 							/>
 						) : (
-							''
+							<div className="board-summary-img-placeholder" />
 						)}
 						<div className="board-summary-description">
 							<h3 className="board-summary-name">{board.name}</h3>
@@ -33,7 +33,7 @@ class BoardList extends Component {
 			<section>
 				<div className="user-area">
 					<div className="user-profile">
-						<h2 className="username">Username</h2>
+						<h2 className="username">{localStorage.username}</h2>
 						<p className="boards-num">{this.props.boards.length} boards</p>
 					</div>
 					<div className="logout">

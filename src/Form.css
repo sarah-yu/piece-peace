@@ -1,0 +1,40 @@
+.form-section {
+	margin: 20px 0;
+}
+
+.form-label {
+	font-size: 14px;
+	letter-spacing: 0.5px;
+}
+
+.form-field {
+	font-size: 16px;
+	padding: 7px 5px;
+	width: 300px;
+	margin-top: 8px;
+}
+
+.form-field:focus {
+	outline: none;
+}
+
+.form-btn {
+	background-color: #4f9a94;
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Amiko', sans-serif;
+	font-size: 14px;
+	letter-spacing: 0.8px;
+	outline: none;
+	padding: 8px 20px;
+}
+
+.form-btn:hover {
+	opacity: 0.9;
+}
+
+.edit-btns button {
+	margin-right: 10px;
+}
