@@ -94,7 +94,7 @@ class BoardShow extends Component {
 		this.setState(
 			{
 				imageEditOn: true,
-				imageToEditId: e.target.name,
+				imageToEditId: e.currentTarget.name,
 				newBoardId: this.props.match.params._id
 			},
 			() => {

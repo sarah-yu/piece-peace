@@ -33,14 +33,14 @@ class BoardNew extends Component {
 		return (
 			<section>
 				<h1>Create a new board</h1>
-				<form onSubmit={e => this.handleSubmit(e)}>
+				<form onSubmit={this.props.handleNewBoardSubmit}>
 					<p>
 						<label htmlFor="board[name]">Name </label>
 						<input
 							type="text"
-							name="board[name]"
-							placeholder="Name your new board"
-							onChange={e => this.handleInput(e)}
+							name="name"
+							placeholder="What's the name of your board?"
+							onChange={this.props.handleNewBoardInput}
 						/>
 					</p>
 					<p>

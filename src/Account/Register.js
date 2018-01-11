@@ -9,7 +9,7 @@ class Register extends Component {
 
 		this.state = {
 			user: {
-				email: '',
+				username: '',
 				password: '',
 				confirmPassword: ''
 			}
@@ -18,7 +18,7 @@ class Register extends Component {
 		this.getToken = getToken.bind(this)
 	}
 
-	validate(email, password, confirmPassword) {
+	validate(username, password, confirmPassword) {
 		if (password === confirmPassword && password.length >= 8) {
 			return true
 		} else {
@@ -36,13 +36,13 @@ class Register extends Component {
 	handleSubmit(e) {
 		e.preventDefault()
 
-		let email = this.state.user.email
+		let username = this.state.user.username
 		let password = this.state.user.password
 		let confirmPassword = this.state.user.confirmPassword
 		let register = 'register'
 
-		if (this.validate(email, password, confirmPassword)) {
-			this.getToken(register, email, password)
+		if (this.validate(username, password, confirmPassword)) {
+			this.getToken(register, username, password)
 		} else {
 			console.log('invalid registration')
 		}
@@ -54,12 +54,12 @@ class Register extends Component {
 				<h1>Register</h1>
 				<form onSubmit={e => this.handleSubmit(e)}>
 					<div>
-						<label htmlFor="email">Email</label>
+						<label htmlFor="username">Username</label>
 						<br />
 						<input
 							type="text"
-							name="email"
-							placeholder="Email"
+							name="username"
+							placeholder="Username"
 							onChange={e => this.handleInput(e)}
 						/>
 					</div>
@@ -84,7 +84,7 @@ class Register extends Component {
 						/>
 					</div>
 					<div>
-						<button type="submit">Login</button>
+						<button type="submit">Register</button>
 					</div>
 				</form>
 				<div>

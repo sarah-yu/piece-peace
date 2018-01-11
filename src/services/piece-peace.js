@@ -8,10 +8,10 @@ servicePath = 'http://localhost:3001/api'
 // }
 
 // login or register
-export function getToken(action, email, password) {
+export function getToken(action, username, password) {
 	axios
 		.post(`${servicePath}/${action}`, {
-			email: email,
+			username: username,
 			password: password
 		})
 		.then(response => {
@@ -56,14 +56,20 @@ export function getBoard(id) {
 export function createBoard(newBoard) {
 	axios
 		.post(`${servicePath}/boards`, newBoard)
-		.then(response => this.props.history.push(`/boards/${response.data._id}`))
+		.then(response => {
+			this.props.history.push(`/boards`)
+			// window.location.reload()
+		})
 		.catch(err => console.log(err))
 }
 
 export function deleteBoard(id) {
 	axios
 		.delete(`${servicePath}/boards/${id}`)
-		.then(response => this.props.history.push('/boards'))
+		.then(response => {
+			this.props.history.push('/boards')
+			window.location.reload()
+		})
 		.catch(err => console.log(err))
 }
 
