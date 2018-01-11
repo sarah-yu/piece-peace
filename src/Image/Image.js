@@ -17,7 +17,11 @@ class Image extends Component {
 		super(props)
 
 		this.state = {
-			imageToPin: {},
+			imageToPin: {
+				origin: '',
+				src: '',
+				description: ''
+			},
 			imagePinOn: false,
 			newBoardId: ''
 		}
@@ -31,7 +35,8 @@ class Image extends Component {
 		e.preventDefault()
 
 		let currentBoardId = this.props.match.params._id
-		let imageToPinId = e.target.name
+		// currentTarget solves issue where clicking icon inside button errors out
+		let imageToPinId = e.currentTarget.name
 
 		this.setState(
 			{
@@ -48,10 +53,11 @@ class Image extends Component {
 	}
 
 	handlePinInput(e) {
-		let imageToPin = this.state.imageToPin
-		imageToPin[e.target.name] = e.target.value
-
-		this.setState({ imageToPin })
+		this.setState({
+			imageToPin: {
+				[e.target.name]: e.target.value
+			}
+		})
 	}
 
 	// handles dropdown (which board image will be pinned to)

@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 
 import Header from './Header/Header'
 import ImageList from './ImageList/ImageList'
 import BoardList from './BoardList/BoardList'
 import BoardShow from './BoardShow/BoardShow'
 import BoardNew from './BoardNew/BoardNew'
-import ImageReceive from './ImageReceive/ImageReceive'
 import Login from './Account/Login'
 import Logout from './Account/Logout'
 import Register from './Account/Register'
-import { getBoards, getImages } from './services/piece-peace'
+import { getBoards, getImages, createBoard } from './services/piece-peace'
 
 import './App.css'
-
-// import Masonry from 'masonry-layout'
 
 class App extends Component {
 	constructor(props) {
@@ -22,25 +19,37 @@ class App extends Component {
 
 		this.state = {
 			boards: [],
-			images: []
+			images: [],
+			newBoard: {
+				name: ''
+			}
 		}
+
+		this.validateImageMove = this.validateImageMove.bind(this)
 
 		this.getBoards = getBoards.bind(this)
 		this.getImages = getImages.bind(this)
-
-		this.validateImageMove = this.validateImageMove.bind(this)
+		this.createBoard = createBoard.bind(this)
 	}
 
 	componentDidMount() {
 		this.getBoards()
 		this.getImages()
+	}
 
-		// let grid = document.querySelector('.grid')
-		// let msnry = new Masonry(grid, {
-		// 	itemSelector: '.grid-item',
-		// 	columnWidth: 120,
-		// 	gutter: 10
-		// })
+	handleNewBoardInput(e) {
+		console.log(e.target.value)
+		this.setState({
+			newBoard: {
+				name: e.target.value
+			}
+		})
+	}
+
+	handleNewBoardSubmit(e) {
+		e.preventDefault()
+
+		this.createBoard(this.state.newBoard)
 	}
 
 	// same image (identical image._id) cannot be pinned to same board twice
@@ -98,7 +107,13 @@ class App extends Component {
 						<Route
 							exact
 							path="/boards/new"
-							render={props => <BoardNew {...props} />}
+							render={props => (
+								<BoardNew
+									{...props}
+									handleNewBoardInput={e => this.handleNewBoardInput(e)}
+									handleNewBoardSubmit={e => this.handleNewBoardSubmit(e)}
+								/>
+							)}
 						/>
 						<Route
 							exact
@@ -111,11 +126,7 @@ class App extends Component {
 								/>
 							)}
 						/>
-						<Route
-							exact
-							path="/receive-images"
-							render={props => <ImageReceive {...props} />}
-						/>
+
 						<Route path="/*" render={() => <Redirect to="/" />} />
 					</Switch>
 				</main>
@@ -124,4 +135,4 @@ class App extends Component {
 	}
 }
 
-export default App
+export default withRouter(App)

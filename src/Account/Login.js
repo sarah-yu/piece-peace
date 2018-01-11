@@ -9,7 +9,7 @@ class Login extends Component {
 
 		this.state = {
 			user: {
-				email: '',
+				username: '',
 				password: ''
 			}
 		}
@@ -27,11 +27,11 @@ class Login extends Component {
 	handleSubmit(e) {
 		e.preventDefault()
 
-		let email = this.state.user.email
+		let username = this.state.user.username
 		let password = this.state.user.password
 		let login = 'login'
 
-		this.getToken(login, email, password)
+		this.getToken(login, username, password)
 	}
 
 	render() {
@@ -40,12 +40,12 @@ class Login extends Component {
 				<h1>Login</h1>
 				<form onSubmit={e => this.handleSubmit(e)}>
 					<div>
-						<label htmlFor="email">Email</label>
+						<label htmlFor="username">Username</label>
 						<br />
 						<input
 							type="text"
-							name="email"
-							placeholder="Email"
+							name="username"
+							placeholder="Username"
 							onChange={e => this.handleInput(e)}
 						/>
 					</div>

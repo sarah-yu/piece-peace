@@ -1,0 +1,33 @@
+.board-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	height: 200px;
+	margin: 0 auto;
+	width: 90%;
+}
+
+.board-edit {
+	color: #888;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.board-edit:hover {
+	color: #666;
+}
+
+.board-name,
+.board-num-pins {
+	margin: 0;
+}
+
+.board-name {
+	margin-bottom: 8px;
+}
+
+.board-num-pins {
+	color: #888;
+	font-size: 14px;
+}

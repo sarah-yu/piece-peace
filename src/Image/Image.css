@@ -12,6 +12,7 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
+	align-content: flex-start;
 	margin: 0 auto;
 	width: 90%; /* makes the div look 'centered' on page */
 }
