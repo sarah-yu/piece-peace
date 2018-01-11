@@ -55,11 +55,10 @@ class Image extends Component {
 	}
 
 	handlePinInput(e) {
-		this.setState({
-			imageToPin: {
-				[e.target.name]: e.target.value
-			}
-		})
+		let imageToPin = this.state.imageToPin
+		imageToPin[e.target.name] = e.target.value
+
+		this.setState({ imageToPin })
 	}
 
 	// handles dropdown (which board image will be pinned to)

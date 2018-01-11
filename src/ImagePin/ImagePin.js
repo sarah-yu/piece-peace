@@ -13,16 +13,16 @@ class ImagePin extends Component {
 			)
 		})
 
-		let imageSrc = this.props.imageToPin.src
-		let imgAlt = this.props.imageToPin.description
-
 		return (
 			<section className="image-pin-container">
 				<h2>Pin to a board</h2>
 				<form onSubmit={this.props.handlePinSave}>
 					<div className="form-sides">
 						<div className="form-section form-left form-image">
-							<img src={imageSrc} alt={imgAlt} />
+							<img
+								src={this.props.imageToPin.src}
+								alt={this.props.imageToPin.description}
+							/>
 						</div>
 
 						<div className="form-right">
