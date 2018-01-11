@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { getToken } from '../services/piece-peace'
+
+import './Account.css'
+import '../Form.css'
 
 class Register extends Component {
 	constructor(props) {
@@ -53,48 +56,54 @@ class Register extends Component {
 			<section>
 				<h1>Register</h1>
 				<form onSubmit={e => this.handleSubmit(e)}>
-					<div>
-						<label htmlFor="username">Username</label>
+					<div className="form-section">
+						<label htmlFor="username" className="form-label">
+							Username
+						</label>
 						<br />
 						<input
 							type="text"
 							name="username"
 							placeholder="Username"
+							className="form-field"
 							onChange={e => this.handleInput(e)}
 						/>
 					</div>
-					<div>
-						<label htmlFor="password">Password</label>
+					<div className="form-section">
+						<label htmlFor="password" className="form-label">
+							Password
+						</label>
 						<br />
 						<input
 							type="password"
 							name="password"
 							placeholder="Password"
+							className="form-field"
 							onChange={e => this.handleInput(e)}
 						/>
 					</div>
-					<div>
-						<label htmlFor="confirmPassword">Confirm Password</label>
+					<div className="form-section">
+						<label htmlFor="confirmPassword" className="form-label">
+							Confirm Password
+						</label>
 						<br />
 						<input
 							type="password"
 							name="confirmPassword"
 							placeholder="Confirm Password"
+							className="form-field"
 							onChange={e => this.handleInput(e)}
 						/>
 					</div>
-					<div>
-						<button type="submit">Register</button>
+					<div className="form-section">
+						<button type="submit" className="form-btn">
+							Register
+						</button>
 					</div>
 				</form>
-				<div>
-					<p>
-						Already have an account? Log in <Link to="/login">here</Link>.
-					</p>
-				</div>
 			</section>
 		)
 	}
 }
 
-export default Register
+export default withRouter(Register)

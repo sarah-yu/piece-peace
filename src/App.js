@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import ReactModal from 'react-modal'
 
 import Header from './Header/Header'
 import ImageList from './ImageList/ImageList'
@@ -9,6 +10,8 @@ import BoardNew from './BoardNew/BoardNew'
 import Login from './Account/Login'
 import Logout from './Account/Logout'
 import Register from './Account/Register'
+import ImageUpload from './ImageUpload/ImageUpload'
+
 import { getBoards, getImages, createBoard } from './services/piece-peace'
 
 import './App.css'
@@ -22,10 +25,16 @@ class App extends Component {
 			images: [],
 			newBoard: {
 				name: ''
-			}
+			},
+			showLogin: false,
+			showRegister: false
 		}
 
 		this.validateImageMove = this.validateImageMove.bind(this)
+		this.handleOpenLogin = this.handleOpenLogin.bind(this)
+		this.handleCloseLogin = this.handleCloseLogin.bind(this)
+		this.handleOpenRegister = this.handleOpenRegister.bind(this)
+		this.handleCloseRegister = this.handleCloseRegister.bind(this)
 
 		this.getBoards = getBoards.bind(this)
 		this.getImages = getImages.bind(this)
@@ -35,6 +44,39 @@ class App extends Component {
 	componentDidMount() {
 		this.getBoards()
 		this.getImages()
+
+		ReactModal.setAppElement('#main')
+		ReactModal.defaultStyles.overlay.top = '70px'
+		ReactModal.defaultStyles.content.width = '420px'
+		ReactModal.defaultStyles.content.height = '600px'
+		ReactModal.defaultStyles.content.border = '1px solid #f2f2f2'
+		ReactModal.defaultStyles.content.borderRadius = '5px'
+	}
+
+	handleOpenLogin() {
+		this.setState({
+			showLogin: true,
+			showRegister: false
+		})
+	}
+
+	handleCloseLogin() {
+		this.setState({
+			showLogin: false
+		})
+	}
+
+	handleOpenRegister() {
+		this.setState({
+			showRegister: true,
+			showLogin: false
+		})
+	}
+
+	handleCloseRegister() {
+		this.setState({
+			showRegister: false
+		})
 	}
 
 	handleNewBoardInput(e) {
@@ -71,8 +113,26 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Header />
-				<main>
+				<Header handleOpenLogin={this.handleOpenLogin} />
+				<main id="main">
+					<ReactModal
+						isOpen={this.state.showLogin}
+						contentLabel="Login"
+						onRequestClose={this.handleCloseLogin}
+						bodyOpenClassName="login-modal"
+					>
+						<Login
+							handleCloseLogin={this.handleCloseLogin}
+							handleOpenRegister={this.handleOpenRegister}
+						/>
+					</ReactModal>
+					<ReactModal
+						isOpen={this.state.showRegister}
+						contentLabel="Register"
+						onRequestClose={this.handleCloseRegister}
+					>
+						<Register handleCloseRegister={this.handleCloseRegister} />
+					</ReactModal>
 					<Switch>
 						<Route
 							exact
@@ -86,16 +146,10 @@ class App extends Component {
 								/>
 							)}
 						/>
-						<Route exact path="/login" render={props => <Login {...props} />} />
 						<Route
 							exact
 							path="/logout"
 							render={props => <Logout {...props} />}
-						/>
-						<Route
-							exact
-							path="/register"
-							render={props => <Register {...props} />}
 						/>
 						<Route
 							exact
@@ -125,6 +179,11 @@ class App extends Component {
 									validateImageMove={this.validateImageMove}
 								/>
 							)}
+						/>
+						<Route
+							exact
+							path="/upload"
+							render={props => <ImageUpload {...props} />}
 						/>
 
 						<Route path="/*" render={() => <Redirect to="/" />} />

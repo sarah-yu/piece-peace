@@ -22,9 +22,11 @@ export function getToken(action, username, password) {
 
 			if (action === 'register') {
 				console.log('registration successful')
+				this.props.handleCloseRegister()
 			} else {
 				// if (action === 'login')
 				console.log('login successful')
+				this.props.handleCloseLogin()
 			}
 
 			this.props.history.push('/')

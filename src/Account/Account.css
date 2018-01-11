@@ -1,0 +1,15 @@
+.ReactModal__Content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.ReactModal__Content > section {
+	margin-top: -50px;
+}
+
+.link-to-register:hover {
+	color: #666;
+}
