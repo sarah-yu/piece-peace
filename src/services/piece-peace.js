@@ -16,8 +16,9 @@ export function getToken(action, username, password) {
 		})
 		.then(response => {
 			localStorage.token = response.data.token
-
+			localStorage.username = response.data.username
 			console.log(localStorage.token)
+			console.log(localStorage.username)
 
 			if (action === 'register') {
 				console.log('registration successful')
@@ -57,8 +58,9 @@ export function createBoard(newBoard) {
 	axios
 		.post(`${servicePath}/boards`, newBoard)
 		.then(response => {
-			this.props.history.push(`/boards`)
-			// window.location.reload()
+			console.log(response.data)
+			window.location.href = '/boards'
+			//this.props.history.push(`/boards`)
 		})
 		.catch(err => console.log(err))
 }
@@ -68,7 +70,7 @@ export function deleteBoard(id) {
 		.delete(`${servicePath}/boards/${id}`)
 		.then(response => {
 			this.props.history.push('/boards')
-			window.location.reload()
+			window.location.href = '/boards'
 		})
 		.catch(err => console.log(err))
 }
@@ -78,6 +80,8 @@ export function updateBoard(id, updatedBoard) {
 		.put(`${servicePath}/boards/${id}`, updatedBoard)
 		.then(response => {
 			this.props.history.push(`/boards/${response.data._id}`)
+
+			console.log(response.data)
 		})
 		.catch(err => console.log(err))
 }
@@ -99,9 +103,16 @@ export function getImage(id) {
 		.get(`${servicePath}/images/${id}`)
 		.then(response => {
 			// (original) image (not a board image) for pinning
-			this.setState({
-				imageToPin: response.data
-			})
+			this.setState(
+				{
+					imageToPin: response.data
+				},
+				() => {
+					console.log('***IMAGE TO PIN***')
+					console.log(this.state.imageToPin)
+					console.log('******************')
+				}
+			)
 		})
 		.catch(err => console.log(err))
 }
@@ -175,6 +186,16 @@ export function pinImageToBoard(boardId, imageToPin) {
 		.catch(err => console.log(err))
 }
 
+export function uploadImage(stuff) {
+	console.log(stuff)
+	axios
+		.post(`${servicePath}/upload`, stuff)
+		.then(response => {
+			console.log(response)
+		})
+		.catch(err => console.log(err))
+}
+
 export default {
 	getToken,
 	getBoards,
@@ -188,5 +209,6 @@ export default {
 	deleteBoardImage,
 	updateBoardImage,
 	removeImageFromBoard,
-	pinImageToBoard
+	pinImageToBoard,
+	uploadImage
 }

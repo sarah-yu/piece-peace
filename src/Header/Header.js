@@ -15,7 +15,8 @@ const Header = () => (
 
 			{localStorage.token ? (
 				<Link to="/boards">
-					<i className="fa fa-user-circle" aria-hidden="true" /> Username
+					<i className="fa fa-user-circle" aria-hidden="true" />{' '}
+					{localStorage.username}
 				</Link>
 			) : (
 				<Link to="/login">

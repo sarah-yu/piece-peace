@@ -38,6 +38,8 @@ class Image extends Component {
 		// currentTarget solves issue where clicking icon inside button errors out
 		let imageToPinId = e.currentTarget.name
 
+		console.log(imageToPinId)
+
 		this.setState(
 			{
 				imagePinOn: true

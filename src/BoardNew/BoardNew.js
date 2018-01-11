@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 
-import { createBoard } from '../services/piece-peace'
+// import { createBoard } from '../services/piece-peace'
 
 class BoardNew extends Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			board: {
-				name: ''
-			}
-		}
-
-		this.createBoard = createBoard.bind(this)
-	}
-
-	handleInput(e) {
-		this.setState({
-			board: {
-				name: e.target.value
-			}
-		})
-	}
-
-	handleSubmit(e) {
-		e.preventDefault()
-
-		this.createBoard(this.state)
-	}
+	// constructor(props) {
+	// 	super(props)
+	//
+	// 	this.state = {
+	// 		board: {
+	// 			name: ''
+	// 		}
+	// 	}
+	//
+	// 	this.createBoard = createBoard.bind(this)
+	// }
+	//
+	// handleInput(e) {
+	// 	this.setState({
+	// 		board: {
+	// 			name: e.target.value
+	// 		}
+	// 	})
+	// }
+	//
+	// handleSubmit(e) {
+	// 	e.preventDefault()
+	//
+	// 	this.createBoard(this.state)
+	// }
 
 	render() {
 		return (
