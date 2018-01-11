@@ -1,51 +1,38 @@
 import React, { Component } from 'react'
 
-// import { createBoard } from '../services/piece-peace'
+import './BoardNew.css'
 
 class BoardNew extends Component {
-	// constructor(props) {
-	// 	super(props)
-	//
-	// 	this.state = {
-	// 		board: {
-	// 			name: ''
-	// 		}
-	// 	}
-	//
-	// 	this.createBoard = createBoard.bind(this)
-	// }
-	//
-	// handleInput(e) {
-	// 	this.setState({
-	// 		board: {
-	// 			name: e.target.value
-	// 		}
-	// 	})
-	// }
-	//
-	// handleSubmit(e) {
-	// 	e.preventDefault()
-	//
-	// 	this.createBoard(this.state)
-	// }
+	handleCancel(e) {
+		e.preventDefault()
+		this.props.history.push('/boards')
+	}
 
 	render() {
 		return (
-			<section>
-				<h1>Create a new board</h1>
+			<section className="board-info board-new">
+				<h2 className="board-new-title">Create a new board</h2>
 				<form onSubmit={this.props.handleNewBoardSubmit}>
-					<p>
-						<label htmlFor="board[name]">Name </label>
+					<div className="form-section">
 						<input
 							type="text"
 							name="name"
-							placeholder="What's the name of your board?"
+							placeholder="Name your new board"
+							className="form-field"
 							onChange={this.props.handleNewBoardInput}
 						/>
-					</p>
-					<p>
-						<input type="submit" />
-					</p>
+					</div>
+					<div className="form-section edit-btns">
+						<button
+							className="form-btn form-cancel-btn"
+							onClick={e => this.handleCancel(e)}
+						>
+							Cancel
+						</button>
+						<button type="submit" className="form-btn">
+							Save
+						</button>
+					</div>
 				</form>
 			</section>
 		)

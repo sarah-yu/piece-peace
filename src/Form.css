@@ -1,3 +1,12 @@
+.form-sides {
+	display: flex;
+}
+
+.form-left,
+.form-right {
+	margin: 0 30px;
+}
+
 .form-section {
 	margin: 20px 0;
 }
@@ -8,10 +17,11 @@
 }
 
 .form-field {
+	border: 1px solid #d3d3d3;
 	font-size: 16px;
+	margin-top: 8px;
 	padding: 7px 5px;
 	width: 300px;
-	margin-top: 8px;
 }
 
 .form-field:focus {
@@ -35,6 +45,36 @@
 	opacity: 0.9;
 }
 
+.form-cancel-btn,
+.form-delete-btn {
+	background-color: #666;
+	opacity: 0.5;
+}
+
+.form-cancel-btn:hover,
+.form-delete-btn:hover {
+	opacity: 0.7;
+}
+
 .edit-btns button {
 	margin-right: 10px;
+}
+
+.image-edit-btns {
+	text-align: center;
+}
+
+.form-image {
+	width: 300px;
+}
+
+@media screen and (max-width: 700px) {
+	.form-sides {
+		flex-direction: column;
+	}
+
+	.form-left,
+	.form-right {
+		margin: 0;
+	}
 }

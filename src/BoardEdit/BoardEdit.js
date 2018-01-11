@@ -20,10 +20,16 @@ class BoardEdit extends Component {
 						/>
 					</div>
 					<div className="form-section edit-btns">
-						<button className="form-btn" onClick={this.props.handleBoardDelete}>
+						<button
+							className="form-btn form-delete-btn"
+							onClick={this.props.handleBoardDelete}
+						>
 							Delete
 						</button>
-						<button className="form-btn" onClick={this.props.handleBoardCancel}>
+						<button
+							className="form-btn form-cancel-btn"
+							onClick={this.props.handleBoardCancel}
+						>
 							Cancel
 						</button>
 						<button
