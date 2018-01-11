@@ -17,7 +17,7 @@ class BoardList extends Component {
 								className="board-summary-img"
 							/>
 						) : (
-							''
+							<div className="board-summary-img-placeholder" />
 						)}
 						<div className="board-summary-description">
 							<h3 className="board-summary-name">{board.name}</h3>
