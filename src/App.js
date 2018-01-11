@@ -119,7 +119,6 @@ class App extends Component {
 						isOpen={this.state.showLogin}
 						contentLabel="Login"
 						onRequestClose={this.handleCloseLogin}
-						bodyOpenClassName="login-modal"
 					>
 						<Login
 							handleCloseLogin={this.handleCloseLogin}
