@@ -27,12 +27,10 @@ nav a:hover {
 }
 
 .logo {
+	font-size: 20px;
 	letter-spacing: 1px;
-	margin-right: auto;
-}
-
-.logo {
 	line-height: 1.1;
+	margin-right: auto;
 }
 
 .logo-piece {
