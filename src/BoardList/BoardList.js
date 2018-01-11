@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
 
+import ImageNewButton from '../ImageNewButton/ImageNewButton'
+
 import './BoardList.css'
 
 class BoardList extends Component {
@@ -57,6 +59,7 @@ class BoardList extends Component {
 					</Link>
 					{boards}
 				</div>
+				<ImageNewButton />
 			</section>
 		)
 	}

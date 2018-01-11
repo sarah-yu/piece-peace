@@ -198,6 +198,19 @@ export function uploadImage(stuff) {
 		.catch(err => console.log(err))
 }
 
+export function createImage(image) {
+	console.log('sending image to the back:')
+	console.log(image)
+
+	axios
+		.post(`${servicePath}/images`, image)
+		.then(response => {
+			console.log(response)
+			// this.props.history.push('/')
+		})
+		.catch(err => console.log(err))
+}
+
 export default {
 	getToken,
 	getBoards,
@@ -212,5 +225,6 @@ export default {
 	updateBoardImage,
 	removeImageFromBoard,
 	pinImageToBoard,
-	uploadImage
+	uploadImage,
+	createImage
 }

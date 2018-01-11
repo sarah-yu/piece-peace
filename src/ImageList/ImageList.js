@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 import Image from '../Image/Image'
+import ImageNewButton from '../ImageNewButton/ImageNewButton'
+
+import './ImageList.css'
 
 class ImageList extends Component {
 	render() {
@@ -12,6 +15,7 @@ class ImageList extends Component {
 					boards={this.props.boards}
 					validateImageMove={this.props.validateImageMove}
 				/>
+				{localStorage.token ? <ImageNewButton /> : ''}
 			</section>
 		)
 	}
