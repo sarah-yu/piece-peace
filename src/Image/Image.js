@@ -122,13 +122,17 @@ class Image extends Component {
 							) : (
 								''
 							)}
-							<button
-								className="pin-image-btn"
-								name={image._id}
-								onClick={e => this.handlePin(e)}
-							>
-								<i className="fa fa-thumb-tack" aria-hidden="true" />
-							</button>
+							{localStorage.token ? (
+								<button
+									className="pin-image-btn"
+									name={image._id}
+									onClick={e => this.handlePin(e)}
+								>
+									<i className="fa fa-thumb-tack" aria-hidden="true" />
+								</button>
+							) : (
+								''
+							)}
 						</div>
 					</a>
 				</div>

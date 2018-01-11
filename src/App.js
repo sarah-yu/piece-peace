@@ -10,9 +10,16 @@ import BoardNew from './BoardNew/BoardNew'
 import Login from './Account/Login'
 import Logout from './Account/Logout'
 import Register from './Account/Register'
+import ImageNew from './ImageNew/ImageNew'
 import ImageUpload from './ImageUpload/ImageUpload'
 
-import { getBoards, getImages, createBoard } from './services/piece-peace'
+import {
+	getBoards,
+	getImages,
+	createBoard,
+	createImage,
+	pinImageToBoard
+} from './services/piece-peace'
 
 import './App.css'
 
@@ -27,7 +34,13 @@ class App extends Component {
 				name: ''
 			},
 			showLogin: false,
-			showRegister: false
+			showRegister: false,
+			newImage: {
+				boardId: '',
+				src: '',
+				origin: '',
+				description: ''
+			}
 		}
 
 		this.validateImageMove = this.validateImageMove.bind(this)
@@ -39,6 +52,8 @@ class App extends Component {
 		this.getBoards = getBoards.bind(this)
 		this.getImages = getImages.bind(this)
 		this.createBoard = createBoard.bind(this)
+		this.createImage = createImage.bind(this)
+		this.pinImageToBoard = pinImageToBoard.bind(this)
 	}
 
 	componentDidMount() {
@@ -110,6 +125,42 @@ class App extends Component {
 		}
 	}
 
+	handleImageNewInput(e) {
+		e.preventDefault()
+
+		console.log(e.target.name, e.target.value)
+
+		let newImage = this.state.newImage
+		newImage[e.target.name] = e.target.value
+		this.setState({ newImage }, () => {
+			console.log(this.state.newImage)
+		})
+	}
+
+	handleImageNewSubmit(e) {
+		e.preventDefault()
+
+		console.log('creating new image...')
+		console.log(this.state.newImage)
+
+		let newImage = {
+			src: this.state.newImage.src,
+			origin: this.state.newImage.origin,
+			description: this.state.newImage.description
+		}
+
+		let boardId = this.state.newImage.boardId
+
+		if (newImage.src && boardId) {
+			console.log('true')
+
+			this.createImage(newImage)
+			this.pinImageToBoard(boardId, newImage)
+		} else {
+			console.log('need at least board and image url')
+		}
+	}
+
 	render() {
 		return (
 			<div>
@@ -142,6 +193,7 @@ class App extends Component {
 									images={this.state.images}
 									boards={this.state.boards}
 									validateImageMove={this.validateImageMove}
+									handleImageNew={e => this.handleImageNew(e)}
 								/>
 							)}
 						/>
@@ -176,6 +228,18 @@ class App extends Component {
 									{...props}
 									boards={this.state.boards}
 									validateImageMove={this.validateImageMove}
+								/>
+							)}
+						/>
+						<Route
+							exact
+							path="/images/new"
+							render={props => (
+								<ImageNew
+									{...props}
+									boards={this.state.boards}
+									handleImageNewInput={e => this.handleImageNewInput(e)}
+									handleImageNewSubmit={e => this.handleImageNewSubmit(e)}
 								/>
 							)}
 						/>
