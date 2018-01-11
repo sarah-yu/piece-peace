@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 let servicePath
-// if (document.location.hostname === 'localhost') {
-servicePath = 'http://localhost:3001/api'
-// } else {
-// 	servicePath = 'deployed api'
-// }
+if (document.location.hostname === 'localhost') {
+	servicePath = 'http://localhost:3001/api'
+} else {
+	servicePath = 'https://piece-peace-api.herokuapp.com/api'
+}
 
 // login or register
 export function getToken(action, username, password) {
