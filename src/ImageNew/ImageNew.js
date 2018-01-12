@@ -73,7 +73,12 @@ class ImageNew extends Component {
 					</div>
 
 					<div className="form-section edit-btns image-edit-btns">
-						<button className="form-btn form-cancel-btn">Cancel</button>
+						<button
+							className="form-btn form-cancel-btn"
+							onClick={this.props.handleImageNewCancel}
+						>
+							Cancel
+						</button>
 						<button
 							type="submit"
 							className="form-btn"

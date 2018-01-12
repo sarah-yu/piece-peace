@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import ImageUploader from 'react-images-upload'
+
 import { uploadImage } from '../services/piece-peace'
 
 class ImageUpload extends Component {
@@ -6,54 +8,27 @@ class ImageUpload extends Component {
 		super(props)
 
 		this.state = {
-			image: ''
+			pictures: []
 		}
 
-		this.uploadImage = uploadImage.bind(this)
+		this.onDrop = this.onDrop.bind(this)
 	}
 
-	handleChange(e) {
-		console.log(e.target.value)
-
-		this.setState(
-			{
-				[e.target.name]: e.target.value
-			},
-			() => {
-				console.log('state:')
-				console.log(this.state)
-			}
-		)
-	}
-
-	handleSubmit(e) {
-		e.preventDefault()
-
-		this.uploadImage(this.state)
+	onDrop(picture) {
+		this.setState({
+			pictures: this.state.pictures.concat(picture)
+		})
 	}
 
 	render() {
 		return (
-			<div>
-				<form
-					encType="multipart/form-data"
-					onSubmit={e => this.handleSubmit(e)}
-				>
-					<div>
-						<label htmlFor="image">Upload Image</label>
-						<br />
-						<input
-							type="file"
-							name="image"
-							onChange={e => this.handleChange(e)}
-						/>
-					</div>
-
-					<div>
-						<button type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
+			<ImageUploader
+				withIcon={true}
+				buttonText="Choose images"
+				onChange={this.onDrop}
+				imgExtension={['.jpg', '.gif', '.png', '.gif']}
+				maxFileSize={5242880}
+			/>
 		)
 	}
 }

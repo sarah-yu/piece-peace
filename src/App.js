@@ -152,6 +152,12 @@ class App extends Component {
 		}
 	}
 
+	handleImageNewCancel(e) {
+		e.preventDefault()
+
+		this.props.history.push('/')
+	}
+
 	render() {
 		return (
 			<div>
@@ -231,6 +237,7 @@ class App extends Component {
 									boards={this.state.boards}
 									handleImageNewInput={e => this.handleImageNewInput(e)}
 									handleImageNewSubmit={e => this.handleImageNewSubmit(e)}
+									handleImageNewCancel={e => this.handleImageNewCancel(e)}
 								/>
 							)}
 						/>

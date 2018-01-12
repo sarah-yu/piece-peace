@@ -29,7 +29,7 @@
 	background-color: #fff;
 	margin: 10px;
 	overflow: hidden;
-	padding: 5px;
+	padding: 8px;
 	width: 300px;
 }
 
@@ -54,11 +54,29 @@
 	opacity: 1;
 }
 
+.image-container:hover .image-origin-link {
+	opacity: 1;
+}
+
+.image-container:hover .image-origin-link:hover {
+	color: #444;
+	opacity: 0.8;
+}
+
 .image-description {
 	font-size: 14px;
 	overflow-wrap: break-word;
 	padding: 0 5px;
 }
+
+.image-origin-link {
+	color: #d3d3d3;
+	opacity: 0;
+}
+
+/* .image-origin-link:hover {
+	color: #444;
+} */
 
 .image-edit button {
 	border: none;

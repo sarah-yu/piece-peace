@@ -107,34 +107,43 @@ class Image extends Component {
 		let images = this.props.images.map((image, index) => {
 			return (
 				<div key={index} className="image-container">
-					<a href={image.origin} target="_blank">
-						<img src={image.src} alt={image.description} className="image" />
-						<p className="image-description">{image.description}</p>
-						<div className="image-edit">
-							{this.props.isBoardImage ? (
-								<button
-									className="edit-image-btn"
-									name={image._id}
-									onClick={this.props.handleImageEditOn}
-								>
-									<i className="fa fa-pencil" aria-hidden="true" />
-								</button>
-							) : (
-								''
-							)}
-							{localStorage.token ? (
-								<button
-									className="pin-image-btn"
-									name={image._id}
-									onClick={e => this.handlePin(e)}
-								>
-									<i className="fa fa-thumb-tack" aria-hidden="true" />
-								</button>
-							) : (
-								''
-							)}
-						</div>
-					</a>
+					<img src={image.src} alt={image.description} className="image" />
+					<p className="image-description">{image.description}</p>
+					{image.origin ? (
+						<a
+							href={image.origin}
+							target="_blank"
+							className="image-description image-origin-link"
+						>
+							<i class="fa fa-external-link" aria-hidden="true" />
+						</a>
+					) : (
+						''
+					)}
+					<div className="image-edit">
+						{this.props.isBoardImage ? (
+							<button
+								className="edit-image-btn"
+								name={image._id}
+								onClick={this.props.handleImageEditOn}
+							>
+								<i className="fa fa-pencil" aria-hidden="true" />
+							</button>
+						) : (
+							''
+						)}
+						{localStorage.token ? (
+							<button
+								className="pin-image-btn"
+								name={image._id}
+								onClick={e => this.handlePin(e)}
+							>
+								<i className="fa fa-thumb-tack" aria-hidden="true" />
+							</button>
+						) : (
+							''
+						)}
+					</div>
 				</div>
 			)
 		})
