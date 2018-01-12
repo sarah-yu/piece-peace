@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+import ReactModal from 'react-modal'
 
 import ImageEdit from '../ImageEdit/ImageEdit'
 import ImagePin from '../ImagePin/ImagePin'
+import ImageShow from '../ImageShow/ImageShow'
+
 import {
 	getImage,
 	getBoardImage,
@@ -23,8 +26,13 @@ class Image extends Component {
 				description: ''
 			},
 			imagePinOn: false,
-			newBoardId: ''
+			newBoardId: '',
+			showImage: false,
+			imageToShow: {}
 		}
+
+		this.handleOpenImage = this.handleOpenImage.bind(this)
+		this.handleCloseImage = this.handleCloseImage.bind(this)
 
 		this.getImage = getImage.bind(this)
 		this.getBoardImage = getBoardImage.bind(this)
@@ -103,11 +111,48 @@ class Image extends Component {
 		}
 	}
 
+	handleOpenImage(e) {
+		console.log('showing image')
+
+		let showImageId = e.currentTarget.dataset.index
+
+		this.setState(
+			{
+				showImage: true,
+				imageToShow: this.props.images[showImageId]
+			},
+			() => {
+				console.log(this.state.imageToShow)
+			}
+		)
+	}
+
+	handleCloseImage() {
+		console.log('closing image')
+
+		this.setState(
+			{
+				showImage: false,
+				imageToShow: {}
+			},
+			() => {
+				console.log(this.state.showImage)
+				console.log(this.state.imageToShow)
+			}
+		)
+	}
+
 	render() {
 		let images = this.props.images.map((image, index) => {
 			return (
 				<div key={index} className="image-container">
-					<img src={image.src} alt={image.description} className="image" />
+					<img
+						src={image.src}
+						alt={image.description}
+						className="image"
+						data-index={index}
+						onClick={e => this.handleOpenImage(e)}
+					/>
 					<p className="image-description">{image.description}</p>
 					{image.origin ? (
 						<a
@@ -115,7 +160,7 @@ class Image extends Component {
 							target="_blank"
 							className="image-description image-origin-link"
 						>
-							<i class="fa fa-external-link" aria-hidden="true" />
+							<i className="fa fa-external-link" aria-hidden="true" />
 						</a>
 					) : (
 						''
@@ -173,7 +218,21 @@ class Image extends Component {
 				handlePinSave={e => this.handlePinSave(e)}
 			/>
 		) : (
-			<div className="images">{images}</div>
+			<div className="images">
+				<ReactModal
+					isOpen={this.state.showImage}
+					contentLabel="Show Image"
+					onRequestClose={this.handleCloseImage}
+					className="show-image-modal"
+				>
+					<ImageShow
+						imageToShow={this.state.imageToShow}
+						handleCloseImage={this.handleCloseImage}
+					/>
+				</ReactModal>
+
+				{images}
+			</div>
 		)
 	}
 }

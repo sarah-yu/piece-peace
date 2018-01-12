@@ -33,6 +33,10 @@
 	width: 300px;
 }
 
+.image {
+	cursor: pointer;
+}
+
 .image-edit {
 	position: absolute;
 	top: 5%;
@@ -74,10 +78,6 @@
 	opacity: 0;
 }
 
-/* .image-origin-link:hover {
-	color: #444;
-} */
-
 .image-edit button {
 	border: none;
 	border-radius: 3px;
@@ -106,6 +106,19 @@
 	background-color: #4f9a94;
 }
 
+/*  image show modal */
+.show-image-modal {
+	box-shadow: none !important;
+	outline: none;
+	padding: 30px;
+	width: 50%; /* need to change this for mobile */
+}
+
+.show-image-container {
+	max-width: 400px;
+}
+
+/*  media queries */
 @media screen and (max-width: 480px) {
 	.images {
 		flex-flow: column;

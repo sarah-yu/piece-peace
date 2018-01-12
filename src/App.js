@@ -62,7 +62,7 @@ class App extends Component {
 
 		ReactModal.setAppElement('#main')
 		ReactModal.defaultStyles.overlay.top = '70px'
-		ReactModal.defaultStyles.content.width = '420px'
+		ReactModal.defaultStyles.content.width = '500px'
 		ReactModal.defaultStyles.content.height = '600px'
 		ReactModal.defaultStyles.content.border = '1px solid #f2f2f2'
 		ReactModal.defaultStyles.content.borderRadius = '5px'
