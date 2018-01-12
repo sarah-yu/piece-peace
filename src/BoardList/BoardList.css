@@ -1,18 +1,9 @@
-/*
-.boards
---> .board-summary-container
------> img / board-summary-img
------> .board-summary-description
---------> h3 (board-name)
---------> p (# of pins in board)
-*/
-
 .boards {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
 	margin: 0 auto;
-	width: 90%; /* makes the div look 'centered' on page */
+	width: 90%;
 }
 
 .board-summary-img-placeholder {

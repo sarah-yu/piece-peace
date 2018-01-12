@@ -1,13 +1,3 @@
-/*
-.images
---> .image-container
------> image / .image
------> p (image description)
------> .image-edit
---------> button (edit)
---------> button (pin)
-*/
-
 .images {
 	display: flex;
 	flex-flow: row wrap;

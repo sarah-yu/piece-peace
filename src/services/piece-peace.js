@@ -103,16 +103,9 @@ export function getImage(id) {
 		.get(`${servicePath}/images/${id}`)
 		.then(response => {
 			// (original) image (not a board image) for pinning
-			this.setState(
-				{
-					imageToPin: response.data
-				},
-				() => {
-					console.log('***IMAGE TO PIN***')
-					console.log(this.state.imageToPin)
-					console.log('******************')
-				}
-			)
+			this.setState({
+				imageToPin: response.data
+			})
 		})
 		.catch(err => console.log(err))
 }
@@ -168,6 +161,7 @@ export function updateBoardImage(boardId, imageId, updatedBoardImage) {
 		.catch(err => console.log(err))
 }
 
+// same as deleteBoardImage? remove this?
 export function removeImageFromBoard(boardId, imageId) {
 	axios
 		.delete(`${servicePath}/boards/${boardId}/images/${imageId}`)

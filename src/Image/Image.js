@@ -46,8 +46,6 @@ class Image extends Component {
 		// currentTarget solves issue where clicking icon inside button errors out
 		let imageToPinId = e.currentTarget.name
 
-		console.log(`IMAGE: imageToPinId: ${imageToPinId}`)
-
 		this.setState(
 			{
 				imagePinOn: true
@@ -112,34 +110,19 @@ class Image extends Component {
 	}
 
 	handleOpenImage(e) {
-		console.log('showing image')
-
 		let showImageId = e.currentTarget.dataset.index
 
-		this.setState(
-			{
-				showImage: true,
-				imageToShow: this.props.images[showImageId]
-			},
-			() => {
-				console.log(this.state.imageToShow)
-			}
-		)
+		this.setState({
+			showImage: true,
+			imageToShow: this.props.images[showImageId]
+		})
 	}
 
 	handleCloseImage() {
-		console.log('closing image')
-
-		this.setState(
-			{
-				showImage: false,
-				imageToShow: {}
-			},
-			() => {
-				console.log(this.state.showImage)
-				console.log(this.state.imageToShow)
-			}
-		)
+		this.setState({
+			showImage: false,
+			imageToShow: {}
+		})
 	}
 
 	render() {
