@@ -128,20 +128,13 @@ class App extends Component {
 	handleImageNewInput(e) {
 		e.preventDefault()
 
-		console.log(e.target.name, e.target.value)
-
 		let newImage = this.state.newImage
 		newImage[e.target.name] = e.target.value
-		this.setState({ newImage }, () => {
-			console.log(this.state.newImage)
-		})
+		this.setState({ newImage })
 	}
 
 	handleImageNewSubmit(e) {
 		e.preventDefault()
-
-		console.log('creating new image...')
-		console.log(this.state.newImage)
 
 		let newImage = {
 			src: this.state.newImage.src,
@@ -152,8 +145,6 @@ class App extends Component {
 		let boardId = this.state.newImage.boardId
 
 		if (newImage.src && boardId) {
-			console.log('true')
-
 			this.createImage(newImage)
 			this.pinImageToBoard(boardId, newImage)
 		} else {

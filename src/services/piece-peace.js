@@ -61,7 +61,7 @@ export function createBoard(newBoard) {
 		.post(`${servicePath}/boards`, newBoard)
 		.then(response => {
 			console.log(response.data)
-			this.props.history.push(`/boards`)
+			this.props.history.push(`/boards/${response.data._id}`)
 		})
 		.catch(err => console.log(err))
 }
@@ -186,10 +186,10 @@ export function pinImageToBoard(boardId, imageToPin) {
 		.catch(err => console.log(err))
 }
 
-export function uploadImage(stuff) {
-	console.log(stuff)
+export function uploadImage(image) {
+	console.log(image)
 	axios
-		.post(`${servicePath}/upload`, stuff)
+		.post(`${servicePath}/upload`, image)
 		.then(response => {
 			console.log(response)
 		})
@@ -197,9 +197,6 @@ export function uploadImage(stuff) {
 }
 
 export function createImage(image) {
-	console.log('sending image to the back:')
-	console.log(image)
-
 	axios
 		.post(`${servicePath}/images`, image)
 		.then(response => {

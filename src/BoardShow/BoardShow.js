@@ -157,9 +157,12 @@ class BoardShow extends Component {
 
 		if (currentBoardId === newBoardId) {
 			this.updateBoardImage(
-				newBoardId, // because currentBoardId and newBoardId are identical
-				imageId,
-				updatedBoardImage
+				// newBoardId, // because currentBoardId and newBoardId are identical
+				this.state.newBoardId,
+				// imageId,
+				this.state.imageToEditId,
+				// updatedBoardImage
+				this.state.imageToEdit
 			)
 
 			this.setState({
@@ -168,8 +171,13 @@ class BoardShow extends Component {
 		} else {
 			// move image to a different board
 			if (this.props.validateImageMove(newBoardId, imageId)) {
-				this.removeImageFromBoard(currentBoardId, imageId)
-				this.pinImageToBoard(newBoardId, updatedBoardImage)
+				// this.removeImageFromBoard(currentBoardId, imageId)
+				this.removeImageFromBoard(
+					this.state.board._id,
+					this.state.imageToEditId
+				)
+				// this.pinImageToBoard(newBoardId, updatedBoardImage)
+				this.pinImageToBoard(this.state.newBoardId, this.state.imageToEdit)
 
 				this.setState({
 					imageEditOn: false
