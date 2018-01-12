@@ -101,7 +101,7 @@
 	box-shadow: none !important;
 	outline: none;
 	padding: 30px;
-	width: 50%; /* need to change this for mobile */
+	width: 50%;
 }
 
 .show-image-container {
@@ -115,5 +115,9 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
+	}
+
+	.show-image-modal {
+		width: 90%;
 	}
 }
