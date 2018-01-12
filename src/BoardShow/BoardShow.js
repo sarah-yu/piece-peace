@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import BoardEdit from '../BoardEdit/BoardEdit'
 import Image from '../Image/Image'
+import ImageNewButton from '../ImageNewButton/ImageNewButton'
+
 import {
 	getBoard,
 	deleteBoard,
@@ -220,6 +222,7 @@ class BoardShow extends Component {
 					handleImageEditSubmit={e => this.handleImageEditSubmit(e)}
 					validateImageMove={this.props.validateImageMove}
 				/>
+				<ImageNewButton />
 			</section>
 		)
 	}

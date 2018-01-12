@@ -61,8 +61,7 @@ export function createBoard(newBoard) {
 		.post(`${servicePath}/boards`, newBoard)
 		.then(response => {
 			console.log(response.data)
-			window.location.href = '/boards'
-			//this.props.history.push(`/boards`)
+			this.props.history.push(`/boards`)
 		})
 		.catch(err => console.log(err))
 }
@@ -72,7 +71,6 @@ export function deleteBoard(id) {
 		.delete(`${servicePath}/boards/${id}`)
 		.then(response => {
 			this.props.history.push('/boards')
-			window.location.href = '/boards'
 		})
 		.catch(err => console.log(err))
 }

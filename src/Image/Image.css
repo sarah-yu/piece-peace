@@ -14,7 +14,7 @@
 	align-items: flex-start;
 	align-content: flex-start;
 	margin: 0 auto;
-	width: 90%; /* makes the div look 'centered' on page */
+	width: 90%;
 }
 
 .image-container,
@@ -88,15 +88,11 @@
 	background-color: #4f9a94;
 }
 
-/* masonry? */
-/* clearfix */
-/* .grid:after {
-	content: '';
-	display: block;
-	clear: both;
+@media screen and (max-width: 480px) {
+	.images {
+		flex-flow: column;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+	}
 }
-
-.grid-item {
-	float: left;
-	width: 300px;
-} */
